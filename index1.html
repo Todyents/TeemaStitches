@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="main-head">
+                <div class="toggle-button">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+                <h1>WALE WAVES</h1>
+                <nav class="nav">
+                    <ul>
+                        <li class="links"><a href="#home">Home</a> </li>
+                        <li class="links"><a href="#gallery">Gallery</a> </li>
+                        <li class="links"><a href="#livestream">LiveStream</a> </li>
+                        <li class="links"><a href="#contact">Contact</a> </li>
+                       
+                    </ul>
+                </nav>
+            </div> 
+        </div>
+    </header>
+    <section id="home">
+       
+
+    </section>
+    <section id="gallery">
+        <div class="containerimg">
+            <div class="slider fade active">
+                <video src="./images/wals.mp4" controls></video>
+            </div>
+            <div class="slider fade ">
+                <img src="./images/web1.jpeg" alt="">
+            </div>
+            <div class="slider fade ">
+                <img src="./images/web2.jpeg" alt="">
+            </div>
+            <div class="slider fade ">
+                <img src="./images/web3.jpg" alt="">
+            </div>
+            <div class="slider fade ">
+                <img src="./images/web4.jpg" alt="">
+            </div>
+            <div class="slider fade ">
+                <img src="./images/web5.jpg" alt="">
+            </div>
+            <span id="prev" class="prev"><i class="fas fa-angle-left"></i> </span>
+           
+            <span id="next" class="next"><i class="fas fa-angle-right"></i></span>
+            <ul id="indicators" class="indicators">
+            </ul>
+       </div>
+      
+    </section>
+   
+    <section id="livestream">
+        <!-- livestream link and video here -->
+       
+       
+
+    </section>
+    <section id="contact">
+        <!-- send me stuffs for the contact footer -->
+        <h1> for contact and support</h1>
+       
+
+    </section>
+    <script>
+        const links= document.querySelectorAll('.links');
+        const sec= document.querySelectorAll('section');
+        function activeMenu(){
+            let len = sec.length;
+            while(--len && window.scrollY + 97 < sec[len].offsetTop){}
+            links.forEach(ltx => ltx.classList.remove("active"));
+            links[len].classList.add("active");
+
+        }
+        activeMenu();
+        window.addEventListener("scroll", activeMenu);
+
+
+    const toggleButton = document.getElementsByClassName('toggle-button')[0] 
+    const navbarLinks =  document.getElementsByClassName('nav')[0] 
+    toggleButton.addEventListener('click', ()=>{
+     navbarLinks.classList.toggle('nav').style.display='none'
+ 
+})
+
+        
+
+         
+    </script>
+    <script>
+        let sliders = document.querySelectorAll('.slider'),
+        prevBtn = document.querySelector('#prev'),
+        nextBtn = document.querySelector('#next'),
+        indicators = document.querySelector('#indicators'),
+        current = 0;
+ 
+         //Create Bullets Function
+        function createBullets(){
+         sliders.forEach((slider) =>{
+             //create element li
+             let li =document.createElement("li");
+             indicators.appendChild(li);
+         });
+ 
+        }
+ 
+        createBullets();
+ 
+        let indicatorsLi = document.querySelectorAll('#indicators li');
+ 
+        function addActiveBullet(n){
+         //remove all active class from li
+             indicatorsLi.forEach((li)=>{
+                 li.classList.remove('active')
+             });
+             //add active class to current li
+             indicatorsLi[n].classList.add('active');
+        }
+ 
+ 
+ 
+        nextBtn.addEventListener("click", nextImg);
+        prevBtn.addEventListener("click", prevImg );
+ 
+        addActiveBullet(current);
+        function showImg(n){
+         // remove active class from all slide
+         sliders.forEach((slide)=>{
+              slide.classList.remove('active');
+         }); 
+         //Add class active to  current slide
+         sliders[n].classList.add('active');
+          
+        }
+        function nextImg(){
+             if (current < sliders.length -1){
+                 current++;
+             }
+             else{
+                 current = 0;
+             }
+             showImg(current);
+             addActiveBullet(current); 
+        }
+        function prevImg(){
+         if (current <= 0){
+                 current = sliders.length -1;
+             }
+             else{
+                 current--;
+             }
+             showImg(current);
+             addActiveBullet(current); 
+        }
+        function bulletsBtn(){
+         indicatorsLi.forEach((li, i)=>{
+             li.addEventListener('click',()=>{
+                 current = i;
+                 showImg(current);
+                 addActiveBullet(current); 
+ 
+             })
+  
+         })
+         }
+         bulletsBtn();
+        
+     </script>
+ 
+</body>
+</html>
